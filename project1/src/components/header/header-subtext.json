@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_header_header_subtexts",
+  "info": {
+    "displayName": "HeaderSubtext"
+  },
+  "options": {},
+  "attributes": {
+    "HeaderSubText": {
+      "type": "text"
+    }
+  }
+}

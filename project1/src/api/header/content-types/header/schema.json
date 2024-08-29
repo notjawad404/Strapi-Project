@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "headers",
+  "info": {
+    "singularName": "header",
+    "pluralName": "headers",
+    "displayName": "Header",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Header": {
+      "type": "dynamiczone",
+      "components": [
+        "header.header-text",
+        "header-img.header-img",
+        "header.header-subtext"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_header_header_texts",
+  "info": {
+    "displayName": "HeaderText"
+  },
+  "options": {},
+  "attributes": {
+    "HeaderText": {
+      "type": "string"
+    }
+  }
+}

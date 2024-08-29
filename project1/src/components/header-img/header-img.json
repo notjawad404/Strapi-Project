@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_header_img_header_imgs",
+  "info": {
+    "displayName": "HeaderImg"
+  },
+  "options": {},
+  "attributes": {
+    "HeaderImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
