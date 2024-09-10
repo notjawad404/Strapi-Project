@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Orders"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "orders"
+    },
+    "billing_info": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::billing-info.billing-info",
+      "inversedBy": "orders"
+    },
+    "orderID": {
+      "type": "uid"
+    }
+  }
+}

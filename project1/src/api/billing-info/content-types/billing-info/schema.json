@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "billing_infos",
+  "info": {
+    "singularName": "billing-info",
+    "pluralName": "billing-infos",
+    "displayName": "billingInfo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Address": {
+      "type": "text"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "billing_info"
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order.order",
+      "mappedBy": "billing_info"
+    }
+  }
+}

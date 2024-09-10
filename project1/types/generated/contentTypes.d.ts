@@ -724,6 +724,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    billing_info: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::billing-info.billing-info'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -781,6 +786,47 @@ export interface PluginI18NLocale extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBillingInfoBillingInfo extends Schema.CollectionType {
+  collectionName: 'billing_infos';
+  info: {
+    singularName: 'billing-info';
+    pluralName: 'billing-infos';
+    displayName: 'billingInfo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Address: Attribute.Text;
+    user: Attribute.Relation<
+      'api::billing-info.billing-info',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    orders: Attribute.Relation<
+      'api::billing-info.billing-info',
+      'oneToMany',
+      'api::order.order'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::billing-info.billing-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::billing-info.billing-info',
       'oneToOne',
       'admin::user'
     > &
@@ -857,6 +903,46 @@ export interface ApiHeaderHeader extends Schema.SingleType {
   };
 }
 
+export interface ApiOrderOrder extends Schema.CollectionType {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: 'Orders';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    products: Attribute.Relation<
+      'api::order.order',
+      'manyToMany',
+      'api::product.product'
+    >;
+    billing_info: Attribute.Relation<
+      'api::order.order',
+      'manyToOne',
+      'api::billing-info.billing-info'
+    >;
+    orderID: Attribute.UID;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
@@ -879,6 +965,11 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'api::product.product',
       'manyToOne',
       'api::category.category'
+    >;
+    orders: Attribute.Relation<
+      'api::product.product',
+      'manyToMany',
+      'api::order.order'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -951,8 +1042,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::billing-info.billing-info': ApiBillingInfoBillingInfo;
       'api::category.category': ApiCategoryCategory;
       'api::header.header': ApiHeaderHeader;
+      'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::project.project': ApiProjectProject;
     }
