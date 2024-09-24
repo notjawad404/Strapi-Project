@@ -971,6 +971,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToMany',
       'api::order.order'
     >;
+    productImage: Attribute.Media<'images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
